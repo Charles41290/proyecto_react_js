@@ -14,7 +14,6 @@ function App() {
       <Titulo/>
       <NavBar/>
       <ItemListContainer mensaje={"📘¡Bienvenido a nuesta librería!📘"}/>
-
     </>
   )
 }
