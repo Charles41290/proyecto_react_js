@@ -26,7 +26,7 @@ const ItemListContainer = () =>{
                 {productos.map(producto => (
                         <div key = {producto.id} className="col-md-3 my-2">
                             <div className="card">
-                                <Link to={"producto/" + producto.id} >
+                                <Link to={"productos/" + producto.id} >
                                     <img src={producto.imagen} className="card-img-top" alt={producto.titulo} />
                                 </Link>
                                 <div className="card-body">

@@ -17,7 +17,7 @@ const ItemDetailContainer = () => {
             setItem(data);
         });
     }, [idProducto]);
-
+ 
     return(
         <ItemDetail item={item} />
     );
