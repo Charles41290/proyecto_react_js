@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 const ItemDetailContainer = () => {
 
     const [item, setItem] = useState([])
-    const {idProducto} = useParams(); // recibe los parametros de Route y llego como string
+    const {idProducto} = useParams(); // recibe los parametros de Route y llega como string
     useEffect (() => {
         let producto = arrayProductos.find(item => item.id == parseInt(idProducto))
         const promesa = new Promise((resolve) =>{

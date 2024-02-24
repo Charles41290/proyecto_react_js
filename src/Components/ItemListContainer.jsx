@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import arrayProductos from "../assets/libros.json"
 import {Link, useParams} from "react-router-dom"
+import { CartContext } from "../context/CartContext";
 
 
 const ItemListContainer = () =>{
     //creo un estado para almacenar el arrayProductos
     const [productos, setProductos] = useState([]);
     const {categoriaAutor} = useParams();
+    const {agregarProductoACarrito} = useContext(CartContext);
 
     useEffect (() => {
         const promesa = new Promise((resolve) =>{
@@ -31,7 +33,7 @@ const ItemListContainer = () =>{
                                     <h5 className="card-title">{producto.titulo}</h5>
                                     <p className="card-text">{producto.autor}</p>
                                     <p className="card-text">${producto.precio}</p>
-                                    <a href="#" className="btn btn-primary">Agregar al carrito</a>
+                                    <a href="#" className="btn btn-primary" onClick={agregarProductoACarrito}>Agregar al carrito</a>
                                 </div>
                             </div>
                         </div>
