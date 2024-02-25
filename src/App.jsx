@@ -10,6 +10,7 @@ import ItemCount from './Components/ItemCount'
 import { CartContext } from '../../../clase11/context/src/context/CartContext'
 import CartContextProvider from './context/CartContext'
 import Cart from './Components/Cart'
+import Checkout from './Components/Checkout'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -29,6 +30,7 @@ function App() {
           <Route path={'/productos/:idProducto'} element = {<ItemDetailContainer />} />
           <Route path={'/autores/:categoriaAutor/productos/:idProducto'} element = {<ItemDetailContainer />} />
           <Route path={'/cart'} element = {<Cart />} />
+          <Route path={'/checkout'} element = {<Checkout />} />
         </Routes>
       </BrowserRouter>
       </CartContextProvider>

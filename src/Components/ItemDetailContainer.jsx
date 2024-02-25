@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 import {getDoc, getFirestore, doc} from 'firebase/firestore';
 
 const ItemDetailContainer = () => {
-
     const [item, setItem] = useState([])
     const {idProducto} = useParams(); // recibe los parametros de Route y llega como string
     /* useEffect (() => {
@@ -31,8 +30,6 @@ const ItemDetailContainer = () => {
 
     }, []);
 
-    
- 
     return(
         <ItemDetail item={item} />
     );
