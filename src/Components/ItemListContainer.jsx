@@ -2,15 +2,17 @@ import { useContext, useEffect, useState } from "react";
 import arrayProductos from "../assets/libros.json"
 import {Link, useParams} from "react-router-dom"
 import { CartContext } from "../context/CartContext";
+import {collection, getDocs, getFirestore, query, where} from 'firebase/firestore';
+import { getDocument } from "../services/firebase";
 
 
 const ItemListContainer = () =>{
     //creo un estado para almacenar el arrayProductos
     const [productos, setProductos] = useState([]);
     const {categoriaAutor} = useParams();
-    const {agregarProductoACarrito} = useContext(CartContext);
+    const {addItem} = useContext(CartContext);
 
-    useEffect (() => {
+    /* useEffect (() => {
         const promesa = new Promise((resolve) =>{
             resolve(categoriaAutor ? arrayProductos.filter(producto => producto.categoria === categoriaAutor) : arrayProductos);
         });
@@ -18,6 +20,18 @@ const ItemListContainer = () =>{
         promesa.then(data => {
             setProductos(data);
         });
+    }, [categoriaAutor]); */
+
+    //revisar para cuando se usa Firebase
+    useEffect (() => {
+        /* const db = getFirestore();
+        const colRef = collection(db, "productos");
+        const consulta = categoriaAutor ? query(colRef, where("categoria", "==", categoriaAutor)) : colRef;
+        getDocs(consulta).then((snapshot) => {
+            const data = snapshot.docs.map(doc => ({id:doc.id,...doc.data()}));
+            setProductos(data);
+        }) */
+        const data = getDocument("productos", categoriaAutor).then(res => setProductos(res));
     }, [categoriaAutor]);
 
     return(
@@ -33,16 +47,14 @@ const ItemListContainer = () =>{
                                     <h5 className="card-title">{producto.titulo}</h5>
                                     <p className="card-text">{producto.autor}</p>
                                     <p className="card-text">${producto.precio}</p>
-                                    <a href="#" className="btn btn-primary" onClick={agregarProductoACarrito}>Agregar al carrito</a>
+                                    <button type="button" className="btn btn-primary" onClick={()=> addItem(producto, 1)}>Agregar al carrito</button>
                                 </div>
                             </div>
                         </div>
                     ))}
             </div>
         </div>
-        
     );
-
 }
 
-    export default ItemListContainer;
+export default ItemListContainer;

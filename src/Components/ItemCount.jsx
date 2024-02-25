@@ -7,10 +7,10 @@ const ItemCount = ({stock, onAdd}) => {
     const [itemAdded, setItemAdded] = useState(false);
 
     const incrementar = () =>{
+
         if(counter < itemStock){
             setCounter(counter + 1);
         }
-        setCounter(counter + 1);
     }
 
     const decrementar = () =>{
@@ -25,7 +25,6 @@ const ItemCount = ({stock, onAdd}) => {
             setCounter(1);
             onAdd(counter);
             setItemAdded(true);
-            //console.log("Agregaste " + counter + " productos al carrito. Quedan "+(itemStock-counter)+" productos disponibles");
         }
     }
 

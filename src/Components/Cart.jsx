@@ -1,9 +1,11 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "../context/CartContext";
 import { Link } from "react-router-dom";
 import trash from "../assets/trash3.svg"
+import { addDoc, collection, getFirestore } from "firebase/firestore";
 
 const Cart = () => {
+    const [cliente, setCliente] = useState({nombre:"", email:""})
     const {cart, removeItem, clear, CantTotalProductos, SumaTotalProductos} = useContext(CartContext);
 
     if(CantTotalProductos() === 0){
@@ -17,6 +19,21 @@ const Cart = () => {
                 </div>
             </div>
         );
+    }
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        const compra = {date: new Date(), cliente, items: cart, total: SumaTotalProductos()};
+
+        const db = getFirestore();
+        const colRef = collection(db, "orders"); // la collection orders no existe en Firestore así que la crea
+        addDoc(colRef, compra)
+        .then((res) => console.log(res))
+        .catch(err => console.log(err));
+    }
+
+    const handleChange = (e) => {
+        setCliente({...cliente, [e.target.name]:e.target.value})
     }
 
     return(
@@ -54,6 +71,19 @@ const Cart = () => {
                     </table>
                 </div>
             </div>
+            
+            <form onSubmit={onSubmit}>
+                <div className="mb-3">
+                    <label htmlFor="nombre" className="form-label">Nombre y apellido</label>
+                    <input type="text" className="form-control" name="nombre" id="exampleInputEmail1" aria-describedby="emailHelp" onChange={handleChange} />
+                    <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="email" className="form-label">Email</label>
+                    <input type="email" className="form-control" name="email" id="exampleInputPassword1" onChange={handleChange}/>
+                </div>
+                <button type="submit" className="btn btn-primary">Enviar</button>
+            </form>
         </div>
     );
 }

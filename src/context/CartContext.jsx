@@ -5,12 +5,6 @@ export const CartContext = createContext(); // defino el nombre del contexto
 const CartContextProvider = ({children}) => {
     const [cart, setCart] = useState([]);
 
-    /* //let productosEnCarrito = [];
-    const agregarProductoACarrito = (producto) => {
-        console.log("Producto agregado al carrito");
-        //productosEnCarrito.push(producto);
-    } */
-
     const addItem = (item, quantity) => {
         // valido si item está en el carrito
         if(isInCart(item.id)){
