@@ -6,8 +6,6 @@ import {BrowserRouter, Routes, Route} from "react-router-dom"
 import SobreNosotros from './Components/SobreNosotros'
 import Contacto from './Components/Contacto'
 import ItemDetailContainer from './Components/ItemDetailContainer'
-import ItemCount from './Components/ItemCount'
-import { CartContext } from '../../../clase11/context/src/context/CartContext'
 import CartContextProvider from './context/CartContext'
 import Cart from './Components/Cart'
 import Checkout from './Components/Checkout'
