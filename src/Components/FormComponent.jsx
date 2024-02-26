@@ -14,7 +14,7 @@ const FormComponent = ({formData, inputChange, onSubmit, error}) => {
                 </>
             ))
             }
-            <button type="submit" className="btn btn-primary">Enviar</button>
+            <button type="submit" className="btn btn-primary">Generar orden</button>
         </form>
     );
 
